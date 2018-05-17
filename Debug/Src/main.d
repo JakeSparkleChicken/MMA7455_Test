@@ -28,7 +28,8 @@ Src/main.o: ../Src/main.c /home/dok/Documents/STI/MMA7455/Inc/main.h \
  /home/dok/Documents/STI/MMA7455/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pwr.h \
  /home/dok/Documents/STI/MMA7455/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pwr_ex.h \
  /home/dok/Documents/STI/MMA7455/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h \
- /home/dok/Documents/STI/MMA7455/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart_ex.h
+ /home/dok/Documents/STI/MMA7455/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart_ex.h \
+ /home/dok/Documents/STI/MMA7455/Inc/MMA7455.h
 
 /home/dok/Documents/STI/MMA7455/Inc/main.h:
 
@@ -91,3 +92,5 @@ Src/main.o: ../Src/main.c /home/dok/Documents/STI/MMA7455/Inc/main.h \
 /home/dok/Documents/STI/MMA7455/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:
 
 /home/dok/Documents/STI/MMA7455/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart_ex.h:
+
+/home/dok/Documents/STI/MMA7455/Inc/MMA7455.h:

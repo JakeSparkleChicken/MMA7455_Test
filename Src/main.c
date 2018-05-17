@@ -39,6 +39,8 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "stm32l4xx_hal.h"
+#include "MMA7455.h"
+
 
 /* USER CODE BEGIN Includes */
 
@@ -48,12 +50,15 @@
 I2C_HandleTypeDef hi2c1;
 
 UART_HandleTypeDef huart2;
-uint8_t xval = 0;
-uint8_t MMA7455_init = 0x11;
-uint8_t *pxval = &xval;
-//pxval = &xval;
-uint8_t *pMMA7455_init = &MMA7455_init;
-uint8_t MMA7455_address = 0x1d<<1;
+int8_t JSC_xval = 0;
+uint8_t *pJSC_xval = &JSC_xval;
+int8_t JSC_yval = 0;
+uint8_t *pJSC_yval = &JSC_yval;
+int8_t JSC_zval = 0;
+uint8_t *pJSC_zval = &JSC_zval;
+
+uint8_t init_byte = JSC_MMA7455_2g_init_byte;
+uint8_t *pJSC_MMA7455_init = &init_byte;
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
 
@@ -113,8 +118,10 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  JSC_MMA7455_Read_X();
-	  if (xval){
+	  JSC_MMA7455_Read_8Bit_X();
+	  JSC_MMA7455_Read_8Bit_Y();
+	  JSC_MMA7455_Read_8Bit_Z();
+	  if (JSC_xval + JSC_yval + JSC_zval){
 		  HAL_GPIO_WritePin(GPIOA, LD2_Pin, 1);
 	  }
 	  else {
@@ -237,7 +244,7 @@ static void MX_USART2_UART_Init(void)
 {
 
   huart2.Instance = USART2;
-  huart2.Init.BaudRate = 115200;
+  huart2.Init.BaudRate = 9600;
   huart2.Init.WordLength = UART_WORDLENGTH_7B;
   huart2.Init.StopBits = UART_STOPBITS_1;
   huart2.Init.Parity = UART_PARITY_NONE;
@@ -292,14 +299,19 @@ static void MX_GPIO_Init(void)
 /* USER CODE BEGIN 4 */
 void JSC_MMA7455_Init()
 {
-	HAL_I2C_Mem_Write(&hi2c1, MMA7455_address, 0x16, 1, pMMA7455_init, 1, 10000);
-	//delay(50);
+	HAL_I2C_Mem_Write(&hi2c1, JSC_MMA7455_address, JSC_MMA7455_init_reg, 1, pJSC_MMA7455_init, 1, 10000);
 }
-void JSC_MMA7455_Read_X()
+void JSC_MMA7455_Read_8Bit_X()
 {
-	HAL_I2C_Mem_Read(&hi2c1, MMA7455_address, 0x06, 1, pxval, 1, 10000);
-	//delay(50);
-	//HAL_I2C_Master_Transmit(&hi2c1, 0x3a, pMMA7455_init, 8, 20);
+	HAL_I2C_Mem_Read(&hi2c1, JSC_MMA7455_address, JSC_MMA7455_8bit_x_reg, 1, pJSC_xval, 1, 10000);
+}
+void JSC_MMA7455_Read_8Bit_Y()
+{
+	HAL_I2C_Mem_Read(&hi2c1, JSC_MMA7455_address, JSC_MMA7455_8bit_y_reg, 1, pJSC_yval, 1, 10000);
+}
+void JSC_MMA7455_Read_8Bit_Z()
+{
+	HAL_I2C_Mem_Read(&hi2c1, JSC_MMA7455_address, JSC_MMA7455_8bit_z_reg, 1, pJSC_zval, 1, 10000);
 }
 /* USER CODE END 4 */
 

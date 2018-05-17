@@ -72,7 +72,8 @@
 /* #define USE_FULL_ASSERT    1U */
 
 /* USER CODE BEGIN Private defines */
-
+//void JSC_MMA7455_Init();
+//void JSC_MMA7455_Read_X();
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus
