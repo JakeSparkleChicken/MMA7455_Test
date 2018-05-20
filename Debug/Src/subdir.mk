@@ -4,19 +4,28 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
+../Src/MMA7455.c \
+../Src/fonts.c \
 ../Src/main.c \
+../Src/ssd1306.c \
 ../Src/stm32l4xx_hal_msp.c \
 ../Src/stm32l4xx_it.c \
 ../Src/system_stm32l4xx.c 
 
 OBJS += \
+./Src/MMA7455.o \
+./Src/fonts.o \
 ./Src/main.o \
+./Src/ssd1306.o \
 ./Src/stm32l4xx_hal_msp.o \
 ./Src/stm32l4xx_it.o \
 ./Src/system_stm32l4xx.o 
 
 C_DEPS += \
+./Src/MMA7455.d \
+./Src/fonts.d \
 ./Src/main.d \
+./Src/ssd1306.d \
 ./Src/stm32l4xx_hal_msp.d \
 ./Src/stm32l4xx_it.d \
 ./Src/system_stm32l4xx.d 

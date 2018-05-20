@@ -35,14 +35,16 @@
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
+  *
   */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "stm32l4xx_hal.h"
-#include "MMA7455.h"
-
 
 /* USER CODE BEGIN Includes */
+#include "MMA7455.h"
+#include "ssd1306.h"
+#include "fonts.h"
 
 /* USER CODE END Includes */
 
@@ -50,17 +52,17 @@
 I2C_HandleTypeDef hi2c1;
 
 UART_HandleTypeDef huart2;
-int8_t JSC_xval = 0;
-uint8_t *pJSC_xval = &JSC_xval;
-int8_t JSC_yval = 0;
-uint8_t *pJSC_yval = &JSC_yval;
-int8_t JSC_zval = 0;
-uint8_t *pJSC_zval = &JSC_zval;
 
-uint8_t init_byte = JSC_MMA7455_2g_init_byte;
-uint8_t *pJSC_MMA7455_init = &init_byte;
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
+int8_t xval = 0;
+//uint8_t *pJSC_xval = &JSC_xval;
+int8_t yval = 0;
+//uint8_t *pJSC_yval = &JSC_yval;
+int8_t zval = 0;
+//uint8_t *pJSC_zval = &JSC_zval;
+//uint8_t init_byte = JSC_MMA7455_2g_init_byte;
+//uint8_t *pJSC_MMA7455_init = &init_byte;
 
 /* USER CODE END PV */
 
@@ -112,21 +114,30 @@ int main(void)
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
   JSC_MMA7455_Init();
+  ssd1306_Init();
+  HAL_Delay(1000);
+  ssd1306_Fill(Black);
+  ssd1306_UpdateScreen();
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  JSC_MMA7455_Read_8Bit_X();
-	  JSC_MMA7455_Read_8Bit_Y();
-	  JSC_MMA7455_Read_8Bit_Z();
-	  if (JSC_xval + JSC_yval + JSC_zval){
-		  HAL_GPIO_WritePin(GPIOA, LD2_Pin, 1);
-	  }
-	  else {
-		  HAL_GPIO_WritePin(GPIOA, LD2_Pin, 0);
-	  }
+	  //JSC_MMA7455_Read_8Bit_X();
+	  //JSC_MMA7455_Read_8Bit_Y();
+	  //JSC_MMA7455_Read_8Bit_Z();
+	  //JSC_MMA7455_Read_8Bit_All();
+	  JSC_MMA7455_Read_8Bit_All();
+	  ssd1306_SetCursor(5,14);
+	  ssd1306_WriteString(JSC_xchar,Font_11x18,White);
+	  ssd1306_WriteString(" ", Font_11x18, White);
+	  ssd1306_WriteString(JSC_ychar,Font_11x18,White);
+	  ssd1306_WriteString(" ", Font_11x18, White);
+	  ssd1306_WriteString(JSC_zchar,Font_11x18,White);
+	  ssd1306_WriteString("   ", Font_11x18, White);
+	  ssd1306_UpdateScreen();
+
   /* USER CODE END WHILE */
 
   /* USER CODE BEGIN 3 */
@@ -297,22 +308,22 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-void JSC_MMA7455_Init()
-{
-	HAL_I2C_Mem_Write(&hi2c1, JSC_MMA7455_address, JSC_MMA7455_init_reg, 1, pJSC_MMA7455_init, 1, 10000);
-}
-void JSC_MMA7455_Read_8Bit_X()
-{
-	HAL_I2C_Mem_Read(&hi2c1, JSC_MMA7455_address, JSC_MMA7455_8bit_x_reg, 1, pJSC_xval, 1, 10000);
-}
-void JSC_MMA7455_Read_8Bit_Y()
-{
-	HAL_I2C_Mem_Read(&hi2c1, JSC_MMA7455_address, JSC_MMA7455_8bit_y_reg, 1, pJSC_yval, 1, 10000);
-}
-void JSC_MMA7455_Read_8Bit_Z()
-{
-	HAL_I2C_Mem_Read(&hi2c1, JSC_MMA7455_address, JSC_MMA7455_8bit_z_reg, 1, pJSC_zval, 1, 10000);
-}
+//void JSC_MMA7455_Init()
+//{
+//	HAL_I2C_Mem_Write(&hi2c1, JSC_MMA7455_I2C_ADDRESS, JSC_MMA7455_init_reg, 1, pJSC_MMA7455_init, 1, 10000);
+//}
+//void JSC_MMA7455_Read_8Bit_X()
+//{
+//	HAL_I2C_Mem_Read(&hi2c1, JSC_MMA7455_I2C_ADDRESS, JSC_MMA7455_8bit_x_reg, 1, pJSC_xval, 1, 10000);
+//}
+//void JSC_MMA7455_Read_8Bit_Y()
+//{
+//	HAL_I2C_Mem_Read(&hi2c1, JSC_MMA7455_I2C_ADDRESS, JSC_MMA7455_8bit_y_reg, 1, pJSC_yval, 1, 10000);
+//}
+//void JSC_MMA7455_Read_8Bit_Z()
+//{
+//	HAL_I2C_Mem_Read(&hi2c1, JSC_MMA7455_I2C_ADDRESS, JSC_MMA7455_8bit_z_reg, 1, pJSC_zval, 1, 10000);
+//}
 /* USER CODE END 4 */
 
 /**
