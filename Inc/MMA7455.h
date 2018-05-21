@@ -27,19 +27,15 @@
 #define JSC_MMA7455_4g_init_byte				((uint8_t)0x19)
 #define JSC_MMA7455_8g_init_byte				((uint8_t)0x11)
 
-extern char JSC_xchar[12];
-extern char JSC_ychar[12];
-extern char JSC_zchar[12];
-
-void JSC_MMA7455_Init();
-void JSC_MMA7455_Read_8Bit_X();
-void JSC_MMA7455_Read_8Bit_Y();
-void JSC_MMA7455_Read_8Bit_Z();
-void JSC_MMA7455_Read_8Bit_All();
-void JSC_MMA7455_Read_10Bit_X();
-void JSC_MMA7455_Read_10Bit_Y();
-void JSC_MMA7455_Read_10Bit_Z();
-void JSC_MMA7455_Read_10Bit_All();
+void JSC_MMA7455_Init_2G();
+void JSC_MMA7455_Init_4G();
+void JSC_MMA7455_Init_8G();
+int8_t JSC_MMA7455_Read_8Bit_X();
+int8_t JSC_MMA7455_Read_8Bit_Y();
+int8_t JSC_MMA7455_Read_8Bit_Z();
+int16_t JSC_MMA7455_Read_10Bit_X();
+int16_t JSC_MMA7455_Read_10Bit_Y();
+int16_t JSC_MMA7455_Read_10Bit_Z();
 
 extern I2C_HandleTypeDef JSC_MMA7455_I2C_PORT;
 
