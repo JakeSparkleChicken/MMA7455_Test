@@ -7,6 +7,8 @@
 
 #include "stm32l4xx_hal.h"
 #include "MMA7455.h"
+#define PI  (3.14159265F);
+
 
 I2C_HandleTypeDef *i2c_instance = &hi2c1;
 
@@ -72,4 +74,40 @@ int16_t JSC_MMA7455_Read_10Bit_Z(void)
 	HAL_I2C_Mem_Read(i2c_instance, JSC_MMA7455_I2C_ADDRESS, JSC_MMA7455_10bit_z_reg_low, 1, &JSC_10bit_zval_high, 1, 10000);
 	int16_t JSC_10bit_zval = ((int16_t)JSC_10bit_zval_high << 8) | JSC_10bit_zval_low;
 	return JSC_10bit_zval;
+}
+float JSC_MMA7455_Pitch(void)
+{
+	float JSC_MMA7455_pitch_denom;
+	float JSC_MMA7455_pitch_sqrt;
+	float JSC_MMA7455_pitch;
+	float JSC_MMA7455_pitch_num;
+	int8_t JSC_MMA7455_sign = 1;
+	if (JSC_MMA7455_Read_8Bit_Z() < 0)
+	{
+		JSC_MMA7455_sign = -1;
+	}
+	JSC_MMA7455_pitch_denom = JSC_MMA7455_Read_8Bit_Y() * JSC_MMA7455_Read_8Bit_Y() + JSC_MMA7455_Read_8Bit_Z() * JSC_MMA7455_Read_8Bit_Z();
+	JSC_MMA7455_pitch_sqrt = sqrt(JSC_MMA7455_pitch_denom);
+	JSC_MMA7455_pitch_num = JSC_MMA7455_Read_8Bit_X();
+	JSC_MMA7455_pitch = atan2 (JSC_MMA7455_pitch_num, JSC_MMA7455_sign * JSC_MMA7455_pitch_sqrt) * 180 / PI;
+	return JSC_MMA7455_pitch;
+
+}
+float JSC_MMA7455_Roll(void)
+{
+	float JSC_MMA7455_roll_denom;
+	float JSC_MMA7455_roll_sqrt;
+	float JSC_MMA7455_roll;
+	float JSC_MMA7455_roll_num;
+	int8_t JSC_MMA7455_sign = 1;
+	if (JSC_MMA7455_Read_8Bit_Z() < 0)
+	{
+		JSC_MMA7455_sign = -1;
+	}
+	JSC_MMA7455_roll_denom = JSC_MMA7455_Read_8Bit_X() * JSC_MMA7455_Read_8Bit_X() + JSC_MMA7455_Read_8Bit_Z() * JSC_MMA7455_Read_8Bit_Z();
+	JSC_MMA7455_roll_sqrt = sqrt(JSC_MMA7455_roll_denom);
+	JSC_MMA7455_roll_num = JSC_MMA7455_Read_8Bit_Y();
+	JSC_MMA7455_roll = atan2 (JSC_MMA7455_roll_num, JSC_MMA7455_sign * JSC_MMA7455_roll_sqrt) * 180 / PI;
+	return JSC_MMA7455_roll;
+
 }

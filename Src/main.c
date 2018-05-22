@@ -58,6 +58,8 @@ UART_HandleTypeDef huart2;
 char x_axis[12];
 char y_axis[12];
 char z_axis[12];
+char pitch[5];
+char roll[5];
 
 /* USER CODE END PV */
 
@@ -122,8 +124,14 @@ int main(void)
 	  sprintf(x_axis, "%d", JSC_MMA7455_Read_8Bit_X());
 	  sprintf(y_axis, "%d", JSC_MMA7455_Read_8Bit_Y());
 	  sprintf(z_axis, "%d", JSC_MMA7455_Read_8Bit_Z());
+	  snprintf(pitch, sizeof(pitch), "%f", JSC_MMA7455_Pitch());
+	  snprintf(roll, sizeof(roll), "%f", JSC_MMA7455_Roll());
 	  //JSC_MMA7455_Read_8Bit_All();
 	  ssd1306_SetCursor(5,14);
+	  ssd1306_WriteString(pitch,Font_11x18,White);
+	  ssd1306_WriteString(" ", Font_11x18, White);
+	  ssd1306_WriteString(roll, Font_11x18, White);
+	  ssd1306_WriteString(" ", Font_11x18, White);
 	  ssd1306_WriteString(x_axis,Font_11x18,White);
 	  ssd1306_WriteString(" ", Font_11x18, White);
 	  ssd1306_WriteString(y_axis,Font_11x18,White);

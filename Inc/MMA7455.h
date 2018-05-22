@@ -6,6 +6,7 @@
  */
 
 #include "stm32l4xx_hal.h"
+#include <math.h>
 
 #ifndef MMA7455_H_
 #define MMA7455_H_
@@ -36,7 +37,8 @@ int8_t JSC_MMA7455_Read_8Bit_Z();
 int16_t JSC_MMA7455_Read_10Bit_X();
 int16_t JSC_MMA7455_Read_10Bit_Y();
 int16_t JSC_MMA7455_Read_10Bit_Z();
-
+float JSC_MMA7455_Pitch();
+float JSC_MMA7455_Roll();
 extern I2C_HandleTypeDef JSC_MMA7455_I2C_PORT;
 
 #endif /* MMA7455_H_ */
