@@ -10,7 +10,11 @@
 #define PI  (3.14159265F);
 
 
-I2C_HandleTypeDef *i2c_instance = &hi2c1;
+I2C_HandleTypeDef *i2c_instance = &hi2c1;			//Change this to the I2C bus that you are using
+
+/* One of these four init functions needs to be called after the MX_I2Cx_Init() in the board initialization
+ * portion of your program.  When in freefall detection mode, it will not provide other measurement information.
+ */
 
 void JSC_MMA7455_Init_2G()
 {
@@ -39,6 +43,11 @@ void JSC_MMA7455_Init_Freefall()
 	HAL_I2C_Mem_Write(i2c_instance, JSC_MMA7455_I2C_ADDRESS, JSC_MMA7455_freefall_limit_reg, 1, &freefall_limit_byte, 1, 10000);
 
 }
+
+/* This function needs to be called at the end of your ISR in order to clear the interrupt flags in register $17.
+ * If you don't call this after the interrupt, the freefall detection will only work once during each power cycle.
+ */
+
 void JSC_MMA7455_Interrupt_Reset()
 {
 	uint8_t clear_byte = JSC_MMA7455_interrupt_clear_byte;
@@ -46,6 +55,11 @@ void JSC_MMA7455_Interrupt_Reset()
 	HAL_I2C_Mem_Write(i2c_instance, JSC_MMA7455_I2C_ADDRESS, JSC_MMA7455_interrupt_reg, 1, &clear_byte, 1, 10000);
 	HAL_I2C_Mem_Write(i2c_instance, JSC_MMA7455_I2C_ADDRESS, JSC_MMA7455_interrupt_reg, 1, &reset_byte, 1, 10000);
 }
+
+/* These three functions read the 8-bit registers for the three axes.  This is not as accurate as the 10-bit mode,
+ * but faster since they each only read one register as opposed to two.
+ */
+
 int8_t JSC_MMA7455_Read_8Bit_X(void)
 {
 	uint8_t JSC_8bit_xval;
@@ -67,6 +81,11 @@ int8_t JSC_MMA7455_Read_8Bit_Z(void)
 	int8_t JSC_signed_zval = JSC_8bit_zval;
 	return JSC_signed_zval;
 }
+
+/* These three functions call the two registers that supply the 10-bit values for the three axes.  Since it reads two
+ * registers per axis, it is slower but more accurate.
+ */
+
 int16_t JSC_MMA7455_Read_10Bit_X(void)
 {
 	uint8_t JSC_10bit_xval_low;
@@ -94,6 +113,9 @@ int16_t JSC_MMA7455_Read_10Bit_Z(void)
 	int16_t JSC_10bit_zval = ((int16_t)JSC_10bit_zval_high << 8) | JSC_10bit_zval_low;
 	return JSC_10bit_zval;
 }
+
+// The pitch and roll functions are based off of the 8-bit reads.
+
 float JSC_MMA7455_Pitch(void)
 {
 	float JSC_MMA7455_pitch_denom;
