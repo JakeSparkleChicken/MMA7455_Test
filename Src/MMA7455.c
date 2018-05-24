@@ -27,6 +27,25 @@ void JSC_MMA7455_Init_8G()
 	uint8_t init_byte = JSC_MMA7455_8g_init_byte;
 	HAL_I2C_Mem_Write(i2c_instance, JSC_MMA7455_I2C_ADDRESS, JSC_MMA7455_init_reg, 1, &init_byte, 1, 10000);
 }
+void JSC_MMA7455_Init_Freefall()
+{
+	uint8_t init_byte = JSC_MMA7455_freefall_init_byte;
+	uint8_t control1_byte = JSC_MMA7455_freefall_control1_byte;
+	uint8_t control2_byte = JSC_MMA7455_freefall_control2_byte;
+	uint8_t freefall_limit_byte = JSC_MMA7455_freefall_limit_byte;
+	HAL_I2C_Mem_Write(i2c_instance, JSC_MMA7455_I2C_ADDRESS, JSC_MMA7455_init_reg, 1, &init_byte, 1, 10000);
+	HAL_I2C_Mem_Write(i2c_instance, JSC_MMA7455_I2C_ADDRESS, JSC_MMA7455_control1_reg, 1, &control1_byte, 1, 10000);
+	HAL_I2C_Mem_Write(i2c_instance, JSC_MMA7455_I2C_ADDRESS, JSC_MMA7455_control2_reg, 1, &control2_byte, 1, 10000);
+	HAL_I2C_Mem_Write(i2c_instance, JSC_MMA7455_I2C_ADDRESS, JSC_MMA7455_freefall_limit_reg, 1, &freefall_limit_byte, 1, 10000);
+
+}
+void JSC_MMA7455_Interrupt_Reset()
+{
+	uint8_t clear_byte = JSC_MMA7455_interrupt_clear_byte;
+	uint8_t reset_byte = JSC_MMA7455_interrupt_reset_byte;
+	HAL_I2C_Mem_Write(i2c_instance, JSC_MMA7455_I2C_ADDRESS, JSC_MMA7455_interrupt_reg, 1, &clear_byte, 1, 10000);
+	HAL_I2C_Mem_Write(i2c_instance, JSC_MMA7455_I2C_ADDRESS, JSC_MMA7455_interrupt_reg, 1, &reset_byte, 1, 10000);
+}
 int8_t JSC_MMA7455_Read_8Bit_X(void)
 {
 	uint8_t JSC_8bit_xval;
