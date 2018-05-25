@@ -2931,19 +2931,19 @@ Discarded input sections
  .group         0x0000000000000000        0x8 Src/MMA7455.o
  .text          0x0000000000000000        0x0 Src/MMA7455.o
  .bss           0x0000000000000000        0x0 Src/MMA7455.o
- .text.JSC_MMA7455_Init_2G
+ .text.MMA7455_Init_2G
                 0x0000000000000000       0x30 Src/MMA7455.o
- .text.JSC_MMA7455_Init_4G
+ .text.MMA7455_Init_4G
                 0x0000000000000000       0x30 Src/MMA7455.o
- .text.JSC_MMA7455_Init_Freefall
+ .text.MMA7455_Init_Freefall
                 0x0000000000000000       0x80 Src/MMA7455.o
- .text.JSC_MMA7455_Interrupt_Reset
+ .text.MMA7455_Interrupt_Reset
                 0x0000000000000000       0x4c Src/MMA7455.o
- .text.JSC_MMA7455_Read_10Bit_X
+ .text.MMA7455_Read_10Bit_X
                 0x0000000000000000       0x50 Src/MMA7455.o
- .text.JSC_MMA7455_Read_10Bit_Y
+ .text.MMA7455_Read_10Bit_Y
                 0x0000000000000000       0x50 Src/MMA7455.o
- .text.JSC_MMA7455_Read_10Bit_Z
+ .text.MMA7455_Read_10Bit_Z
                 0x0000000000000000       0x50 Src/MMA7455.o
  .debug_macro   0x0000000000000000      0x8bc Src/MMA7455.o
  .debug_macro   0x0000000000000000       0x64 Src/MMA7455.o
@@ -4176,26 +4176,26 @@ LOAD /home/dok/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.lin
                 0x0000000008003112       0x68 Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_uart.o
                 0x0000000008003112                HAL_UART_Init
  *fill*         0x000000000800317a        0x2 
- .text.JSC_MMA7455_Init_8G
+ .text.MMA7455_Init_8G
                 0x000000000800317c       0x30 Src/MMA7455.o
-                0x000000000800317c                JSC_MMA7455_Init_8G
- .text.JSC_MMA7455_Read_8Bit_X
+                0x000000000800317c                MMA7455_Init_8G
+ .text.MMA7455_Read_8Bit_X
                 0x00000000080031ac       0x30 Src/MMA7455.o
-                0x00000000080031ac                JSC_MMA7455_Read_8Bit_X
- .text.JSC_MMA7455_Read_8Bit_Y
+                0x00000000080031ac                MMA7455_Read_8Bit_X
+ .text.MMA7455_Read_8Bit_Y
                 0x00000000080031dc       0x30 Src/MMA7455.o
-                0x00000000080031dc                JSC_MMA7455_Read_8Bit_Y
- .text.JSC_MMA7455_Read_8Bit_Z
+                0x00000000080031dc                MMA7455_Read_8Bit_Y
+ .text.MMA7455_Read_8Bit_Z
                 0x000000000800320c       0x30 Src/MMA7455.o
-                0x000000000800320c                JSC_MMA7455_Read_8Bit_Z
+                0x000000000800320c                MMA7455_Read_8Bit_Z
  *fill*         0x000000000800323c        0x4 
- .text.JSC_MMA7455_Pitch
+ .text.MMA7455_Pitch
                 0x0000000008003240       0xc4 Src/MMA7455.o
-                0x0000000008003240                JSC_MMA7455_Pitch
+                0x0000000008003240                MMA7455_Pitch
  *fill*         0x0000000008003304        0x4 
- .text.JSC_MMA7455_Roll
+ .text.MMA7455_Roll
                 0x0000000008003308       0xc4 Src/MMA7455.o
-                0x0000000008003308                JSC_MMA7455_Roll
+                0x0000000008003308                MMA7455_Roll
  .text.MX_GPIO_Init
                 0x00000000080033cc       0x98 Src/main.o
  .text._Error_Handler
@@ -4998,7 +4998,7 @@ OUTPUT(MMA7455.elf elf32-littlearm)
  .debug_macro   0x0000000000026a44      0x324 Src/stm32l4xx_it.o
  .debug_macro   0x0000000000026d68      0x321 Src/system_stm32l4xx.o
 
-.debug_line     0x0000000000000000     0xb282
+.debug_line     0x0000000000000000     0xb284
  .debug_line    0x0000000000000000      0xa0b Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.o
  .debug_line    0x0000000000000a0b      0x9d4 Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_cortex.o
  .debug_line    0x00000000000013df      0x944 Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_gpio.o
@@ -5008,16 +5008,16 @@ OUTPUT(MMA7455.elf elf32-littlearm)
  .debug_line    0x0000000000004bc3      0xb15 Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rcc.o
  .debug_line    0x00000000000056d8      0xda8 Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rcc_ex.o
  .debug_line    0x0000000000006480     0x1360 Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_uart.o
- .debug_line    0x00000000000077e0      0x8c3 Src/MMA7455.o
- .debug_line    0x00000000000080a3      0x7ac Src/fonts.o
- .debug_line    0x000000000000884f      0x8dd Src/main.o
- .debug_line    0x000000000000912c      0x8e5 Src/ssd1306.o
- .debug_line    0x0000000000009a11      0x827 Src/stm32l4xx_hal_msp.o
- .debug_line    0x000000000000a238      0x7cb Src/stm32l4xx_it.o
- .debug_line    0x000000000000aa03      0x800 Src/system_stm32l4xx.o
- .debug_line    0x000000000000b203       0x7f startup/startup_stm32l476xx.o
+ .debug_line    0x00000000000077e0      0x8c5 Src/MMA7455.o
+ .debug_line    0x00000000000080a5      0x7ac Src/fonts.o
+ .debug_line    0x0000000000008851      0x8dd Src/main.o
+ .debug_line    0x000000000000912e      0x8e5 Src/ssd1306.o
+ .debug_line    0x0000000000009a13      0x827 Src/stm32l4xx_hal_msp.o
+ .debug_line    0x000000000000a23a      0x7cb Src/stm32l4xx_it.o
+ .debug_line    0x000000000000aa05      0x800 Src/system_stm32l4xx.o
+ .debug_line    0x000000000000b205       0x7f startup/startup_stm32l476xx.o
 
-.debug_str      0x0000000000000000    0xe465b
+.debug_str      0x0000000000000000    0xe4563
  .debug_str     0x0000000000000000    0xdfffd Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.o
                                       0xe0486 (size before relaxing)
  .debug_str     0x00000000000dfffd      0x3a7 Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_cortex.o
@@ -5036,19 +5036,19 @@ OUTPUT(MMA7455.elf elf32-littlearm)
                                       0xe00a0 (size before relaxing)
  .debug_str     0x00000000000e2868      0xab9 Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_uart.o
                                       0xe0618 (size before relaxing)
- .debug_str     0x00000000000e3321     0x1029 Src/MMA7455.o
-                                      0xe0c68 (size before relaxing)
- .debug_str     0x00000000000e434a       0x70 Src/fonts.o
+ .debug_str     0x00000000000e3321      0xf31 Src/MMA7455.o
+                                      0xe0b70 (size before relaxing)
+ .debug_str     0x00000000000e4252       0x70 Src/fonts.o
                                       0xdf763 (size before relaxing)
- .debug_str     0x00000000000e43ba      0x14b Src/main.o
-                                      0xe1939 (size before relaxing)
- .debug_str     0x00000000000e4505       0xb3 Src/ssd1306.o
+ .debug_str     0x00000000000e42c2      0x14b Src/main.o
+                                      0xe18bd (size before relaxing)
+ .debug_str     0x00000000000e440d       0xb3 Src/ssd1306.o
                                       0xdfd79 (size before relaxing)
- .debug_str     0x00000000000e45b8       0x1b Src/stm32l4xx_hal_msp.o
+ .debug_str     0x00000000000e44c0       0x1b Src/stm32l4xx_hal_msp.o
                                       0xe0586 (size before relaxing)
- .debug_str     0x00000000000e45d3       0x38 Src/stm32l4xx_it.o
+ .debug_str     0x00000000000e44db       0x38 Src/stm32l4xx_it.o
                                       0xdf735 (size before relaxing)
- .debug_str     0x00000000000e460b       0x50 Src/system_stm32l4xx.o
+ .debug_str     0x00000000000e4513       0x50 Src/system_stm32l4xx.o
                                       0xdf8f1 (size before relaxing)
 
 .comment        0x0000000000000000       0x7f

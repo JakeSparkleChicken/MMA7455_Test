@@ -110,7 +110,7 @@ int main(void)
   MX_USART2_UART_Init();
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
-  JSC_MMA7455_Init_8G();
+  MMA7455_Init_8G();
   ssd1306_Init();
   HAL_Delay(1000);
   ssd1306_Fill(Black);
@@ -121,12 +121,12 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  sprintf(x_axis, "%d", JSC_MMA7455_Read_8Bit_X());
-	  sprintf(y_axis, "%d", JSC_MMA7455_Read_8Bit_Y());
-	  sprintf(z_axis, "%d", JSC_MMA7455_Read_8Bit_Z());
-	  snprintf(pitch, sizeof(pitch), "%f", JSC_MMA7455_Pitch());
-	  snprintf(roll, sizeof(roll), "%f", JSC_MMA7455_Roll());
-	  //JSC_MMA7455_Read_8Bit_All();
+	  sprintf(x_axis, "%d", MMA7455_Read_8Bit_X());
+	  sprintf(y_axis, "%d", MMA7455_Read_8Bit_Y());
+	  sprintf(z_axis, "%d", MMA7455_Read_8Bit_Z());
+	  snprintf(pitch, sizeof(pitch), "%f", MMA7455_Read_Pitch());
+	  snprintf(roll, sizeof(roll), "%f", MMA7455_Read_Roll());
+	  //MMA7455_Read_8Bit_All();
 	  ssd1306_SetCursor(5,14);
 	  ssd1306_WriteString(pitch,Font_11x18,White);
 	  ssd1306_WriteString(" ", Font_11x18, White);
@@ -310,22 +310,7 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-//void JSC_MMA7455_Init()
-//{
-//	HAL_I2C_Mem_Write(&hi2c1, JSC_MMA7455_I2C_ADDRESS, JSC_MMA7455_init_reg, 1, pJSC_MMA7455_init, 1, 10000);
-//}
-//void JSC_MMA7455_Read_8Bit_X()
-//{
-//	HAL_I2C_Mem_Read(&hi2c1, JSC_MMA7455_I2C_ADDRESS, JSC_MMA7455_8bit_x_reg, 1, pJSC_xval, 1, 10000);
-//}
-//void JSC_MMA7455_Read_8Bit_Y()
-//{
-//	HAL_I2C_Mem_Read(&hi2c1, JSC_MMA7455_I2C_ADDRESS, JSC_MMA7455_8bit_y_reg, 1, pJSC_yval, 1, 10000);
-//}
-//void JSC_MMA7455_Read_8Bit_Z()
-//{
-//	HAL_I2C_Mem_Read(&hi2c1, JSC_MMA7455_I2C_ADDRESS, JSC_MMA7455_8bit_z_reg, 1, pJSC_zval, 1, 10000);
-//}
+
 /* USER CODE END 4 */
 
 /**
